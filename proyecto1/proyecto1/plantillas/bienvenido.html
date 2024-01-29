@@ -10,6 +10,20 @@
     <h2>Esta es la clase introductoria de Django (framework)</h2>
     <h3>Hoy estamos aprendiendo la arquitectura MTV model template view</h3>
     <h4>Comisión para todos</h4>
+    <br>
+    <h4>Nombre {{nombre}}</h1>
+    <h4>Apellido {{apellido}}</h1>
+    <h4>Autor {{autor}}</h1>
+    <p style="color:red">{{hoy}}</p>
+
+    <H3>Notas del alumno:</H3>
+    {% for n in notas %}
+        {% if n < 9 %}
+            <p style="color:red"> {{n}} es una Buena Nota</p>
+        {% else %}
+            <p style="color:green"> {{n}} es una Excelente Nota</p>
+        {% endif %}        
+    {% endfor %}
     
 </body>
 </html>

@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.template import Template, Context
+from django.template import Template, Context, loader
 
-import datetime
+import datetime, random
+from miapp.models import *
 
 def bienvenido1(request):
     return HttpResponse("Bienvenidos a la Comision 50200 - Clase Django")
@@ -22,9 +23,21 @@ def bienvenido3(request):
     return HttpResponse(respuesta)
 
 def bienvenido_template(request):
-    miHtml = open("C:/CoderHouse PYTHON/Clase___17/proyecto1/proyecto1/plantillas/bienvenido.html")
-    plantilla = Template(miHtml.read())
-    miHtml.close()
-    miContexto = Context()
-    respuesta = plantilla.render(miContexto)
+    hoy = datetime.datetime.now()
+    nombre = "Amadeus"
+    apellido = "Mozart"
+    notas = [10, 9, 8, 9, 10]
+    diccionario = {"nombre": nombre, "apellido": apellido,
+                   "autor": "Pablo Suajes", "hoy": hoy, "notas": notas}
+    
+    plantilla = loader.get_template('bienvenido.html')
+    respuesta = plantilla.render(diccionario)
     return HttpResponse(respuesta)
+
+def nuevo_curso(request):
+    nro_comision = random.randint(1,99999)
+    str_nombre = "Python " + str(nro_comision)
+    curso = Curso(nombre=str_nombre, comision=nro_comision)
+    curso.save()
+    documento = f"<html><h1>Se guardo {str_nombre} y comision {nro_comision}</h1></html>"
+    return HttpResponse(documento)

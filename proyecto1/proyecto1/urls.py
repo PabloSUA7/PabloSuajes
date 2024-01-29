@@ -24,4 +24,5 @@ urlpatterns = [
     path('bienvenido2/<nombre>/', bienvenido2),
     path('bienvenido3/', bienvenido3),
     path('bienvenido4/', bienvenido_template),
+    path('nuevo_curso/', nuevo_curso),
 ]
